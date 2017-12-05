@@ -40,14 +40,14 @@ def main():
 
     print 'average accuracy of decision tree is', sum(acc[0])/splits
     print 'average accuracy of KNN is', sum(acc[1])/splits
-    print 'average accuracy of naive baysian is', sum(acc[2])/splits
+    print 'average accuracy of naive bayes is', sum(acc[2])/splits
 
     f1 = np.array(f1)
     print 'average F-score of decision tree is'
     print np.mean(f1[0, :, 0]), np.mean(f1[0, :, 1]), np.mean(f1[0, :, 2])
     print 'average F-score of KNN is'
     print np.mean(f1[1, :, 0]), np.mean(f1[1, :, 1]), np.mean(f1[1, :, 2])
-    print 'average F-score of naive baysian is'
+    print 'average F-score of naive bayes is'
     print np.mean(f1[2, :, 0]), np.mean(f1[2, :, 1]), np.mean(f1[2, :, 2])
 
 if __name__ == '__main__':

@@ -7,12 +7,17 @@ from sklearn.naive_bayes import GaussianNB
 import numpy as np
 from scipy.stats import norm
 
-class_dtb = [1./3, 1./3, 1./3]
+class_prior = [1./3, 1./3, 1./3]
 
 def nb_posterior(prior, posterior, x):
     result = prior
     for p, xx in zip(posterior, x):
-        result *= norm.pdf(xx, loc=p[0], scale=p[1])
+        if p[1] == 0:
+            if xx != p[0]:
+                result = 0
+                break
+        else:
+            result *= norm.pdf(xx, loc=p[0], scale=p[1])
     return result
 
 def run_iris():
@@ -51,11 +56,10 @@ def run_iris():
             temp = train_data[np.where(train_t == j), i]
             table[i, j, 0] = np.mean(temp)
             table[i, j, 1] = np.std(temp)
-    #print table
 
     predict_t = np.empty(test_t.shape)
     for i in range(len(test_data)):
-        candidate = [nb_posterior(class_dtb[j], table[:, j], test_data[i]) for j in range(3)]
+        candidate = [nb_posterior(class_prior[j], table[:, j], test_data[i]) for j in range(3)]
         predict_t[i] = np.argmax(candidate)
     print accuracy_score(test_t, predict_t)
     print f1_score(test_t, predict_t, average=None)

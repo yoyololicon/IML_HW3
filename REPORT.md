@@ -95,15 +95,15 @@ KNN則是先架構出training data的空間分佈，再去從test data的位置�
 而target value 'area'是連續的，反而要轉成category，因為我們的演算法是分類而非回歸。
 共分成：t=0, 0<t<=1, 1<t<=10, 10<t<=100, 100<t<=1000, 1000<t六個類別。
 
-###Decision Tree
+### Decision Tree
 
 和Iris同。
 
-###KNN
+### KNN
 
 和Iris同，只是k=10。
 
-###Naive Bayes
+### Naive Bayes
 
 基本上和Iris相同，但是category featrue要獨立出來算。
 而且有些feature算出的機率可能是0，也要用laplace smooth處理，不然會預測不出training set沒有的組合。

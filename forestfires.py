@@ -31,8 +31,8 @@ def target_convert(t):
             t[i] = 5
     return t
 
-def run_forestfires():
-    ff = pd.read_csv('forestfires.csv').values
+def run_forestfires(file):
+    ff = pd.read_csv(file).values
     [data, target] = np.split(ff, [12], axis=1)
     target = np.squeeze(target_convert(target)).astype(int)
 
@@ -86,12 +86,12 @@ def run_forestfires():
                 for q in range(len(day_e.classes_)):
                     table_day[q, j] = len(temp[np.where(temp == q)])
 
-    table_month = laplace_smooth(3, table_month)
-    table_day = laplace_smooth(3, table_day)
+    table_month = laplace_smooth(1, table_month)
+    table_day = laplace_smooth(1, table_day)
 
     class_prior = np.array([len(np.where(train_t == i)[0])for i in range(6)], dtype=float)
     if np.count_nonzero(class_prior) < 6:
-        class_prior = np.squeeze(laplace_smooth(3, class_prior[:, np.newaxis]))
+        class_prior = np.squeeze(laplace_smooth(1, class_prior[:, np.newaxis]))
     else:
         class_prior /= np.sum(class_prior)
 

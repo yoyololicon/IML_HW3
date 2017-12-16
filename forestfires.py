@@ -67,12 +67,14 @@ def run_forestfires(file):
     #my implementation
     print 'naive bayes from scratch'
     #for continue variable
-    table_ctn = np.empty([10, 6, 2])
+    table_ctn = np.zeros([10, 6, 2])
     table_month = np.zeros([len(month_e.classes_), 6])
     table_day = np.zeros([len(day_e.classes_), 6])
     for i in range(12):
         for j in range(6):
             temp = train_data[np.where(train_t == j), i]
+            if temp.shape[1] == 0:
+                continue
             if i > 3:
                 table_ctn[i-2, j, 0] = np.mean(temp)
                 table_ctn[i-2, j, 1] = np.std(temp)
@@ -94,7 +96,6 @@ def run_forestfires(file):
         class_prior = np.squeeze(laplace_smooth(1, class_prior[:, np.newaxis]))
     else:
         class_prior /= np.sum(class_prior)
-
 
     predict_t = np.empty(test_t.shape)
     for i in range(len(test_data)):

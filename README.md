@@ -12,7 +12,7 @@ Run the following command will display the classification result using dicision 
 python datasets_analyze.py forestfires.csv
 ```
 
-The Iris will be automatically loaded using sklearn so no need provide csv file.
+Iris will be automatically loaded using sklearn so no need provide csv file.
 
 The output format will like this:
 
@@ -45,3 +45,5 @@ For Iris dataset, the first output score is accuracy, follow with F-score of eac
 For Forest fires dataset it will only output the accuracy, cuz the sparsity of target value make it hard to compute F-score.
 
 It will shuffle the data before split the training set and test set so the output value will be vary.
+
+Detailed discussions written in chinese can be found [here](REPORT.md).
